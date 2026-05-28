@@ -1,24 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3D Website</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+      background:radial-gradient(circle at top,#0f172a,#020617);
+      font-family:Arial,sans-serif;
+      color:white;
+      perspective:1200px;
+    }
+
+    .scene{
+      width:220px;
+      height:220px;
+      position:relative;
+      transform-style:preserve-3d;
+      animation:spin 8s linear infinite;
+    }
+
+    .face{
+      position:absolute;
+      width:220px;
+      height:220px;
+      border:2px solid rgba(255,255,255,0.2);
+      background:rgba(59,130,246,0.15);
+      backdrop-filter:blur(10px);
+      box-shadow:0 0 30px rgba(59,130,246,0.5);
+    }
+
+    .front{ transform:translateZ(110px); }
+    .back{ transform:rotateY(180deg) translateZ(110px); }
+    .right{ transform:rotateY(90deg) translateZ(110px); }
+    .left{ transform:rotateY(-90deg) translateZ(110px); }
+    .top{ transform:rotateX(90deg) translateZ(110px); }
+    .bottom{ transform:rotateX(-90deg) translateZ(110px); }
+
+    .text{
+      position:absolute;
+      text-align:center;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      z-index:10;
+    }
+
+    h1{
+      font-size:4rem;
+      text-shadow:0 0 20px #3b82f6;
+    }
+
+    p{
+      margin-top:10px;
+      opacity:0.8;
+    }
+
+    @keyframes spin{
+      from{
+        transform:rotateX(0deg) rotateY(0deg);
+      }
+      to{
+        transform:rotateX(360deg) rotateY(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
-  <canvas id="bg"></canvas>
-
-  <div class="overlay">
-    <h1>LordLOLQDH</h1>
-    <p>Development • Games • Open Source</p>
-
-    <div class="buttons">
-      <a href="https://github.com/LordLOLQDH" target="_blank">GitHub</a>
-      <a href="https://github.com/LordLOLQDH-s-Organisation" target="_blank">Organisation</a>
-    </div>
+  <div class="text">
+    <h1>3D</h1>
+    <p>LordLOLQDH • Open Source</p>
   </div>
 
-  <script type="module" src="main.js"></script>
+  <div class="scene">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
 </body>
 </html>
