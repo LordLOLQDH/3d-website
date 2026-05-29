@@ -1,95 +1,147 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chunibyo Dimension</title>
+
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    body{
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      overflow:hidden;
-      background:radial-gradient(circle at top,#0f172a,#020617);
-      font-family:Arial,sans-serif;
-      color:white;
-      perspective:1200px;
+    body {
+      overflow: hidden;
+      background: radial-gradient(circle at top, #140b2d, #020617);
+      color: white;
+      font-family: Arial, sans-serif;
     }
 
-    .scene{
-      width:220px;
-      height:220px;
-      position:relative;
-      transform-style:preserve-3d;
-      animation:spin 8s linear infinite;
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
     }
 
-    .face{
-      position:absolute;
-      width:220px;
-      height:220px;
-      border:2px solid rgba(255,255,255,0.2);
-      background:rgba(59,130,246,0.15);
-      backdrop-filter:blur(10px);
-      box-shadow:0 0 30px rgba(59,130,246,0.5);
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 24px;
+      padding: 40px;
+      width: 90%;
+      max-width: 700px;
+      box-shadow: 0 0 40px rgba(139,92,246,0.5);
     }
 
-    .front{ transform:translateZ(110px); }
-    .back{ transform:rotateY(180deg) translateZ(110px); }
-    .right{ transform:rotateY(90deg) translateZ(110px); }
-    .left{ transform:rotateY(-90deg) translateZ(110px); }
-    .top{ transform:rotateX(90deg) translateZ(110px); }
-    .bottom{ transform:rotateX(-90deg) translateZ(110px); }
-
-    .text{
-      position:absolute;
-      text-align:center;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      z-index:10;
+    h1 {
+      font-size: 4rem;
+      color: #c084fc;
+      text-shadow: 0 0 25px #9333ea;
+      margin-bottom: 16px;
     }
 
-    h1{
-      font-size:4rem;
-      text-shadow:0 0 20px #3b82f6;
+    p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      opacity: 0.9;
     }
 
-    p{
-      margin-top:10px;
-      opacity:0.8;
-    }
-
-    @keyframes spin{
-      from{
-        transform:rotateX(0deg) rotateY(0deg);
-      }
-      to{
-        transform:rotateX(360deg) rotateY(360deg);
-      }
+    .magic {
+      margin-top: 20px;
+      color: #67e8f9;
+      font-style: italic;
+      text-shadow: 0 0 12px #06b6d4;
     }
   </style>
 </head>
 <body>
-  <div class="text">
-    <h1>3D</h1>
-    <p>LordLOLQDH • Open Source</p>
+
+  <div class="overlay">
+    <h1>Chunibyo Dimension</h1>
+    <p>
+      Enter the forbidden dimensional gateway.<br>
+      Awaken your hidden powers and drift through a neon anime universe.
+    </p>
+
+    <p class="magic">
+      『 Eternal Eye Awakening System Initialized 』
+    </p>
   </div>
 
-  <div class="scene">
-    <div class="face front"></div>
-    <div class="face back"></div>
-    <div class="face right"></div>
-    <div class="face left"></div>
-    <div class="face top"></div>
-    <div class="face bottom"></div>
-  </div>
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js';
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const torusGeometry = new THREE.TorusKnotGeometry(1, 0.35, 200, 32);
+    const torusMaterial = new THREE.MeshStandardMaterial({
+      color: 0x9333ea,
+      emissive: 0x7e22ce,
+      metalness: 0.9,
+      roughness: 0.1
+    });
+
+    const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+    scene.add(torus);
+
+    const sphereGeometry = new THREE.SphereGeometry(0.15, 16, 16);
+    const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x67e8f9 });
+
+    for (let i = 0; i < 120; i++) {
+      const star = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+      star.position.x = (Math.random() - 0.5) * 50;
+      star.position.y = (Math.random() - 0.5) * 50;
+      star.position.z = (Math.random() - 0.5) * 50;
+
+      scene.add(star);
+    }
+
+    const pointLight = new THREE.PointLight(0xc084fc, 120);
+    pointLight.position.set(5, 5, 5);
+    scene.add(pointLight);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    scene.add(ambientLight);
+
+    camera.position.z = 4;
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      torus.rotation.x += 0.01;
+      torus.rotation.y += 0.015;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 </body>
 </html>
