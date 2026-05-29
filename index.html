@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chunibyo Dimension</title>
+  <title>Love, Chunibyo & Other Delusions Fan Site</title>
 
   <style>
     * {
@@ -14,134 +14,233 @@
 
     body {
       overflow: hidden;
-      background: radial-gradient(circle at top, #140b2d, #020617);
-      color: white;
       font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #1a1038, #020617);
+      color: white;
     }
 
     canvas {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
     }
 
     .overlay {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       z-index: 10;
-      backdrop-filter: blur(14px);
+      padding: 20px;
+    }
+
+    .card {
+      max-width: 850px;
+      width: 100%;
+      padding: 40px;
+      border-radius: 28px;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 24px;
-      padding: 40px;
-      width: 90%;
-      max-width: 700px;
-      box-shadow: 0 0 40px rgba(139,92,246,0.5);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 50px rgba(168,85,247,0.45);
+      text-align: center;
     }
 
     h1 {
       font-size: 4rem;
-      color: #c084fc;
+      color: #d8b4fe;
       text-shadow: 0 0 25px #9333ea;
       margin-bottom: 16px;
     }
 
-    p {
+    .subtitle {
+      color: #67e8f9;
+      margin-bottom: 24px;
       font-size: 1.2rem;
-      line-height: 1.7;
-      opacity: 0.9;
+      text-shadow: 0 0 10px #06b6d4;
     }
 
-    .magic {
-      margin-top: 20px;
-      color: #67e8f9;
+    p {
+      line-height: 1.8;
+      font-size: 1.1rem;
+      opacity: 0.92;
+    }
+
+    .quote {
+      margin-top: 28px;
+      color: #f9a8d4;
       font-style: italic;
-      text-shadow: 0 0 12px #06b6d4;
+      text-shadow: 0 0 12px #ec4899;
+    }
+
+    .characters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .character {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 18px;
+      transition: 0.3s;
+    }
+
+    .character:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 0 24px rgba(192,132,252,0.4);
+    }
+
+    .character h2 {
+      color: #c084fc;
+      margin-bottom: 10px;
+    }
+
+    .eye {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      border: 3px solid rgba(103,232,249,0.25);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 60px rgba(103,232,249,0.2);
+      animation: pulse 4s infinite ease-in-out;
+      z-index: 1;
+    }
+
+    @keyframes pulse {
+      0%,100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.08);
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="overlay">
-    <h1>Chunibyo Dimension</h1>
+<div class="eye"></div>
+
+<div class="overlay">
+  <div class="card">
+    <h1>Love, Chunibyo & Other Delusions</h1>
+
+    <div class="subtitle">
+      Fan Website • Rikka Takanashi • Yuuta Togashi • Dark Flame Master
+    </div>
+
     <p>
-      Enter the forbidden dimensional gateway.<br>
-      Awaken your hidden powers and drift through a neon anime universe.
+      Welcome to a neon anime dimension inspired by the world of Love, Chunibyo & Other Delusions.
+      Explore glowing magic circles, floating stars, and dramatic fantasy energy inspired by the iconic chunibyo imagination battles.
     </p>
 
-    <p class="magic">
-      『 Eternal Eye Awakening System Initialized 』
-    </p>
+    <div class="quote">
+      『 Wicked Lord Shingan has awakened. 』
+    </div>
+
+    <div class="characters">
+      <div class="character">
+        <h2>Rikka</h2>
+        <p>The legendary wielder of the Wicked Lord Shingan.</p>
+      </div>
+
+      <div class="character">
+        <h2>Yuuta</h2>
+        <p>The former Dark Flame Master trying to escape his past.</p>
+      </div>
+
+      <div class="character">
+        <h2>Kumin</h2>
+        <p>The sleepy queen of peaceful chaos and naps.</p>
+      </div>
+
+      <div class="character">
+        <h2>Nibutani</h2>
+        <p>Former magical girl warrior hiding her embarrassing history.</p>
+      </div>
+    </div>
   </div>
+</div>
 
-  <script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js';
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js';
 
-    const scene = new THREE.Scene();
+const scene = new THREE.Scene();
 
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-    const torusGeometry = new THREE.TorusKnotGeometry(1, 0.35, 200, 32);
-    const torusMaterial = new THREE.MeshStandardMaterial({
-      color: 0x9333ea,
-      emissive: 0x7e22ce,
-      metalness: 0.9,
-      roughness: 0.1
-    });
+camera.position.z = 5;
 
-    const torus = new THREE.Mesh(torusGeometry, torusMaterial);
-    scene.add(torus);
+const geometry = new THREE.TorusKnotGeometry(1.2, 0.35, 220, 32);
+const material = new THREE.MeshStandardMaterial({
+  color: 0xa855f7,
+  emissive: 0x7e22ce,
+  metalness: 1,
+  roughness: 0.15
+});
 
-    const sphereGeometry = new THREE.SphereGeometry(0.15, 16, 16);
-    const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x67e8f9 });
+const knot = new THREE.Mesh(geometry, material);
+scene.add(knot);
 
-    for (let i = 0; i < 120; i++) {
-      const star = new THREE.Mesh(sphereGeometry, sphereMaterial);
+const ringGeometry = new THREE.TorusGeometry(2.7, 0.03, 16, 200);
+const ringMaterial = new THREE.MeshBasicMaterial({ color: 0x67e8f9 });
+const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+scene.add(ring);
 
-      star.position.x = (Math.random() - 0.5) * 50;
-      star.position.y = (Math.random() - 0.5) * 50;
-      star.position.z = (Math.random() - 0.5) * 50;
+const starGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-      scene.add(star);
-    }
+for (let i = 0; i < 350; i++) {
+  const star = new THREE.Mesh(starGeometry, starMaterial);
 
-    const pointLight = new THREE.PointLight(0xc084fc, 120);
-    pointLight.position.set(5, 5, 5);
-    scene.add(pointLight);
+  star.position.x = (Math.random() - 0.5) * 100;
+  star.position.y = (Math.random() - 0.5) * 100;
+  star.position.z = (Math.random() - 0.5) * 100;
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-    scene.add(ambientLight);
+  scene.add(star);
+}
 
-    camera.position.z = 4;
+const pointLight = new THREE.PointLight(0xc084fc, 150);
+pointLight.position.set(5, 5, 5);
+scene.add(pointLight);
 
-    function animate() {
-      requestAnimationFrame(animate);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+scene.add(ambientLight);
 
-      torus.rotation.x += 0.01;
-      torus.rotation.y += 0.015;
+function animate() {
+  requestAnimationFrame(animate);
 
-      renderer.render(scene, camera);
-    }
+  knot.rotation.x += 0.006;
+  knot.rotation.y += 0.01;
 
-    animate();
+  ring.rotation.z += 0.003;
+  ring.rotation.x += 0.002;
 
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  </script>
+  renderer.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+
 </body>
 </html>
