@@ -13,103 +13,119 @@
     }
 
     body {
-      overflow: hidden;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
       font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #1a1038, #020617);
+      background: linear-gradient(to bottom, #120b28, #020617);
       color: white;
     }
 
     canvas {
       position: fixed;
       inset: 0;
+      z-index: -1;
     }
 
     .overlay {
-      position: absolute;
-      inset: 0;
+      position: relative;
+      z-index: 10;
+      width: 100%;
       display: flex;
       justify-content: center;
-      align-items: center;
-      z-index: 10;
-      padding: 20px;
+      padding: 80px 20px;
     }
 
     .card {
-      max-width: 850px;
+      max-width: 950px;
       width: 100%;
-      padding: 40px;
+      padding: 50px;
       border-radius: 28px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 0 50px rgba(168,85,247,0.45);
+      background: rgba(10,10,20,0.72);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 0 50px rgba(168,85,247,0.35);
       text-align: center;
     }
 
     h1 {
-      font-size: 4rem;
-      color: #d8b4fe;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      color: #f5d0fe;
       text-shadow: 0 0 25px #9333ea;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      line-height: 1.1;
     }
 
     .subtitle {
-      color: #67e8f9;
-      margin-bottom: 24px;
-      font-size: 1.2rem;
-      text-shadow: 0 0 10px #06b6d4;
+      color: #a5f3fc;
+      margin-bottom: 28px;
+      font-size: 1.15rem;
+      text-shadow: 0 0 10px #0891b2;
     }
 
     p {
-      line-height: 1.8;
-      font-size: 1.1rem;
-      opacity: 0.92;
+      line-height: 1.9;
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.92);
     }
 
     .quote {
       margin-top: 28px;
       color: #f9a8d4;
       font-style: italic;
+      font-size: 1.2rem;
       text-shadow: 0 0 12px #ec4899;
     }
 
     .characters {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin-top: 34px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 42px;
     }
 
     .character {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
-      padding: 18px;
-      transition: 0.3s;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 20px;
+      padding: 22px;
+      transition: transform 0.3s ease;
+      text-align: left;
     }
 
     .character:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 0 24px rgba(192,132,252,0.4);
+      transform: translateY(-6px);
     }
 
     .character h2 {
-      color: #c084fc;
+      color: #d8b4fe;
       margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    .section {
+      margin-top: 50px;
+      text-align: left;
+    }
+
+    .section h3 {
+      color: #c084fc;
+      margin-bottom: 14px;
+      font-size: 1.7rem;
     }
 
     .eye {
-      position: absolute;
+      position: fixed;
       top: 50%;
       left: 50%;
       width: 500px;
       height: 500px;
       border-radius: 50%;
-      border: 3px solid rgba(103,232,249,0.25);
+      border: 2px solid rgba(103,232,249,0.15);
       transform: translate(-50%, -50%);
-      box-shadow: 0 0 60px rgba(103,232,249,0.2);
+      box-shadow: 0 0 60px rgba(103,232,249,0.12);
       animation: pulse 4s infinite ease-in-out;
-      z-index: 1;
+      z-index: -1;
     }
 
     @keyframes pulse {
@@ -117,7 +133,17 @@
         transform: translate(-50%, -50%) scale(1);
       }
       50% {
-        transform: translate(-50%, -50%) scale(1.08);
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .card {
+        padding: 28px;
+      }
+
+      p {
+        font-size: 1rem;
       }
     }
   </style>
@@ -128,15 +154,16 @@
 
 <div class="overlay">
   <div class="card">
+
     <h1>Love, Chunibyo & Other Delusions</h1>
 
     <div class="subtitle">
-      Fan Website • Rikka Takanashi • Yuuta Togashi • Dark Flame Master
+      Fan Website • Kyoto Animation • Rikka Takanashi • Dark Flame Master
     </div>
 
     <p>
-      Welcome to a neon anime dimension inspired by the world of Love, Chunibyo & Other Delusions.
-      Explore glowing magic circles, floating stars, and dramatic fantasy energy inspired by the iconic chunibyo imagination battles.
+      Welcome to a fan-made anime universe inspired by Love, Chunibyo & Other Delusions.
+      This website combines glowing fantasy visuals, animated 3D effects, and the dramatic imagination battles that made the series iconic.
     </p>
 
     <div class="quote">
@@ -145,25 +172,52 @@
 
     <div class="characters">
       <div class="character">
-        <h2>Rikka</h2>
-        <p>The legendary wielder of the Wicked Lord Shingan.</p>
+        <h2>Rikka Takanashi</h2>
+        <p>
+          The wielder of the Wicked Lord Shingan and one of the most iconic chunibyo characters in anime.
+        </p>
       </div>
 
       <div class="character">
-        <h2>Yuuta</h2>
-        <p>The former Dark Flame Master trying to escape his past.</p>
+        <h2>Yuuta Togashi</h2>
+        <p>
+          Former Dark Flame Master trying to leave his embarrassing past behind.
+        </p>
       </div>
 
       <div class="character">
-        <h2>Kumin</h2>
-        <p>The sleepy queen of peaceful chaos and naps.</p>
+        <h2>Kumin Tsuyuri</h2>
+        <p>
+          Calm, sleepy, and somehow always surrounded by chaos and naps.
+        </p>
       </div>
 
       <div class="character">
-        <h2>Nibutani</h2>
-        <p>Former magical girl warrior hiding her embarrassing history.</p>
+        <h2>Shinka Nibutani</h2>
+        <p>
+          Once a magical girl chunibyo herself — now trying to hide the evidence.
+        </p>
       </div>
     </div>
+
+    <div class="section">
+      <h3>About The Anime</h3>
+
+      <p>
+        Love, Chunibyo & Other Delusions mixes romance, comedy, slice-of-life, and fantasy imagination scenes into a unique anime experience.
+        The exaggerated magical battles are visual representations of the characters' fantasies and emotions.
+      </p>
+    </div>
+
+    <div class="section">
+      <h3>3D Fan Experience</h3>
+
+      <p>
+        The animated objects in the background are rendered using Three.js and WebGL.
+        Floating stars, glowing dimensional rings, and rotating energy forms create a fantasy atmosphere inspired by the series.
+      </p>
+    </div>
+
   </div>
 </div>
 
@@ -204,7 +258,7 @@ scene.add(ring);
 const starGeometry = new THREE.SphereGeometry(0.05, 8, 8);
 const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-for (let i = 0; i < 350; i++) {
+for (let i = 0; i < 300; i++) {
   const star = new THREE.Mesh(starGeometry, starMaterial);
 
   star.position.x = (Math.random() - 0.5) * 100;
@@ -214,21 +268,21 @@ for (let i = 0; i < 350; i++) {
   scene.add(star);
 }
 
-const pointLight = new THREE.PointLight(0xc084fc, 150);
+const pointLight = new THREE.PointLight(0xc084fc, 120);
 pointLight.position.set(5, 5, 5);
 scene.add(pointLight);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
 scene.add(ambientLight);
 
 function animate() {
   requestAnimationFrame(animate);
 
-  knot.rotation.x += 0.006;
-  knot.rotation.y += 0.01;
+  knot.rotation.x += 0.004;
+  knot.rotation.y += 0.008;
 
-  ring.rotation.z += 0.003;
-  ring.rotation.x += 0.002;
+  ring.rotation.z += 0.002;
+  ring.rotation.x += 0.001;
 
   renderer.render(scene, camera);
 }
